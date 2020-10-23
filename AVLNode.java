@@ -1,12 +1,19 @@
 package project2;
 
 public class AVLNode {
-	String key; 
-	Book value; //create a class representing a book with minimum attributes
-	int height;
-	AVLNode leftPtr;
-	AVLNode rightPtr;
+	
+	private String key; 
+	private Book value; //create a class representing a book with minimum attributes
+	private int height;
+	private AVLNode leftPtr;
+	private AVLNode rightPtr;
 
+	public String getKey() {
+		return key;
+	}
+	public void setKey(String key) {
+		this.key = key;
+	}
 	public AVLNode()
 	{
 		key ="";
@@ -94,7 +101,7 @@ public class AVLNode {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return key+" Author: "+value.author+" Title: "+value.title;
+		return key+" Author: "+value.getAuthor()+" Title: "+value.getTitle();
 	}
 	
 }

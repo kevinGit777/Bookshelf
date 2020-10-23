@@ -5,10 +5,14 @@ import java.util.Random;
 
 public class AVLTree {
 
-	AVLNode root;
+	private AVLNode root;
 
 	public AVLTree() {
 		root = null;
+	}
+
+	public AVLNode getRoot() {
+		return root;
 	}
 
 	public AVLTree(AVLNode root) {
@@ -22,9 +26,9 @@ public class AVLTree {
 	public void display(AVLNode root) {
 		// check if the node is empty
 		if (root != null) {
-			display(root.leftPtr);
+			display(root.getLeft());
 			System.out.println(root);
-			display(root.rightPtr);
+			display(root.getRight());
 		}
 	}
 
@@ -32,11 +36,11 @@ public class AVLTree {
 		if (current == null) {
 			return node;
 		} else {
-			if (node.key.compareTo(current.key) < 0) // node smaller that current
+			if (node.getKey().compareTo(current.getKey()) < 0) // node smaller that current
 			{
 				current.setLeft(Insert(node, current.getLeft()));
 
-			} else if (node.key.compareTo(current.key) > 0) // node bigger that current
+			} else if (node.getKey().compareTo(current.getKey()) > 0) // node bigger that current
 			{
 				current.setRight(Insert(node, current.getRight()));
 			}
@@ -46,11 +50,11 @@ public class AVLTree {
 			current.updatedHeight();
 
 			if (!current.isBlanced()) {
-				System.out.print("Imbalance occurred at inserting ISBN " + node.key + ";");
+				System.out.print("Imbalance occurred at inserting ISBN " + node.getKey() + ";");
 
-				if (node.key.compareTo(current.key) < 0) // first flag: L
+				if (node.getKey().compareTo(current.getKey()) < 0) // first flag: L
 				{
-					if (node.key.compareTo(current.getLeft().key) < 0) {
+					if (node.getKey().compareTo(current.getLeft().getKey()) < 0) {
 						System.out.println("fixed in Left Rotation.");
 						return LLrotation(current);
 
@@ -61,7 +65,7 @@ public class AVLTree {
 						return LRrotation(current);// LR
 					}
 				} else {
-					if (node.key.compareTo(current.getRight().key) > 0) {
+					if (node.getKey().compareTo(current.getRight().getKey()) > 0) {
 						System.out.println("fixed in Right Rotation.");
 
 						return RRrotition(current);
@@ -109,10 +113,13 @@ public class AVLTree {
 
 	}
 
+	
+	/********use for AVL analyze***********/
 	public AVLNode randomInsert(AVLNode node, AVLNode root) {
 		// TODO Auto-generated method stub
 		if(root ==null)
 			return node;
+		
 		Random rand = new Random();
 		int num = rand.nextInt(2);
 		
@@ -123,10 +130,7 @@ public class AVLTree {
 		else {
 			 root.setLeft(randomInsert(node, root.getRight()));
 				root.updatedHeight();
-
-		}
-		
-		
+		}	
 		return null;
 	}
 }
